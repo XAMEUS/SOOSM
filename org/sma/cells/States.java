@@ -26,23 +26,27 @@ public class States {
 	}
 	
 	public int getSizeX() {
-		return this.sizeX;
+		return sizeX;
 	}
 	
 	public int getSizeY() {
-		return this.sizeY;
+		return sizeY;
 	}
 	
 	public State getState(int x, int y) {
-		return this.states[x][y];
+		return states[x][y];
 	}
 	
-	public int[] numNeighbors(int x, int y) {
-		int[] count = new int[this.colors.length];
-		count[this.states[x][y].getOldState()]--;
-		for (int ix = max(x-1, 0); ix <= min(x+1, this.sizeX-1); ix++) {
-			for (int iy = max(y-1, 0); iy <= min(y+1, this.sizeY-1); iy++) {
-					count[this.states[ix][iy].getOldState()]++;
+	public int numState() {
+		return colors.length;
+	}
+	
+	public int numNeighbors(int x, int y, int state) {
+		int count = 0;
+		for (int ix = max(x-1, 0); ix <= min(x+1, sizeX-1); ix++) {
+			for (int iy = max(y-1, 0); iy <= min(y+1, sizeY-1); iy++) {
+					if (states[ix][iy].getOldState() == state)
+						count++;
 			}
 		}
 		return count;
@@ -50,35 +54,35 @@ public class States {
 	
 	public void setState(int x, int y, int newState)
 	{
-		this.states[x][y].updateState(newState);
+		states[x][y].updateState(newState);
 	}
 	
 	public void setOrigin(int x, int y, int oriState)
 	{
-		this.states[x][y].setOriState(oriState);
+		states[x][y].setOriState(oriState);
 	}
 	
 	public int restart(int x, int y) {
-		return this.states[x][y].backOrigin();
+		return states[x][y].backOrigin();
 	}
 	
 	public int setRandomState(int x, int y)
 	{
-		int randomState = (int)(Math.random() * (this.colors.length - 1)) + 1;
+		int randomState = (int)(Math.random() * colors.length);
 		this.setState(x, y, randomState);
 		return randomState;
 	}
 	
 	public Color getColor(int state) {
-		if (state < 0 || state >= this.colors.length)
+		if (state < 0 || state >= colors.length)
 			throw new IllegalArgumentException("Not in range of colors");
-		return this.colors[state];
+		return colors[state];
 	}
 	
 	public void finishUpdate() {
-		for (int x = 0; x < this.sizeX; x++)
-			for (int y = 0; y < this.sizeY; y++)
-				this.states[x][y].finishUpdate();
+		for (int x = 0; x < sizeX; x++)
+			for (int y = 0; y < sizeY; y++)
+				states[x][y].finishUpdate();
 	}
 	
 
