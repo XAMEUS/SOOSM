@@ -15,7 +15,7 @@ public class ImmigrationGame extends GameOfLife {
 		for (int x = 0; x < s.getSizeX(); x++) {
 			for (int y = 0; y < s.getSizeY(); y++) {
 				int nextState = (s.getState(x, y).getOldState()+1) % s.numState();
-				int count = s.numNeighbors(x, y, nextState);
+				int count = s.numSameNeighbors(x, y, nextState);
 				if (count >= 3) {
 					s.setState(x, y, nextState);
 					addRect(x, y, nextState);

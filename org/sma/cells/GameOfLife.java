@@ -12,21 +12,13 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 	
 	public GameOfLife (int minX, int minY, int maxX, int maxY, int numRectRow, GUISimulator gi, Color[] colors) {
 		super(minX, minY, maxX, maxY, numRectRow, colors);
-		
 		this.gi = gi;
-		for (int x = 0; x < s.getSizeX(); x++) {
-			for (int y = 0; y < s.getSizeY(); y++) {
-				int randState = s.setRandomState(x, y);
-				s.setOrigin(x, y, randState);
-				addRect(x, y, randState);
-			}
-		}
+		initRect();
 	}
+
 	
 	public void addRect(int x, int y, int state) {
-		int xAbs = x * getRectSize() + getMinX();
-		int yAbs = y * getRectSize() + getMinY();
-		Rectangle r = new Rectangle(xAbs, yAbs, Color.black, s.getColor(state), getRectSize());
+		Rectangle r = newRectangle(x, y, state);
 		gi.addGraphicalElement(r);
 	}
 		
@@ -34,7 +26,7 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 	public void next() {
 		for (int x = 0; x < s.getSizeX(); x++) {
 			for (int y = 0; y < s.getSizeY(); y++) {
-				int count = s.numNeighbors(x, y, 1);
+				int count = s.numSameNeighbors(x, y, 1);
 				int state = s.getState(x, y).getOldState();
 				if (state == 0 && count == 3) {
 					s.setState(x, y, 1);
@@ -47,13 +39,6 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 			}
 		}
 		s.finishUpdate();
-	}
-
-	@Override
-	public void restart() {
-		for (int x = 0; x < s.getSizeX(); x++)
-			for (int y = 0; y < s.getSizeY(); y++)
-				addRect(x, y, s.restart(x, y));
 	}
 	
 }

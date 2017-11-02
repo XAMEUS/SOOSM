@@ -41,11 +41,22 @@ public class States {
 		return colors.length;
 	}
 	
-	public int numNeighbors(int x, int y, int state) {
+	public int numSameNeighbors(int x, int y, int state) {
 		int count = 0;
 		for (int ix = max(x-1, 0); ix <= min(x+1, sizeX-1); ix++) {
 			for (int iy = max(y-1, 0); iy <= min(y+1, sizeY-1); iy++) {
 					if (states[ix][iy].getOldState() == state)
+						count++;
+			}
+		}
+		return count;
+	}
+	
+	public int numDiffNeighbors(int x, int y, int state) {
+		int count = 0;
+		for (int ix = max(x-1, 0); ix <= min(x+1, sizeX-1); ix++) {
+			for (int iy = max(y-1, 0); iy <= min(y+1, sizeY-1); iy++) {
+					if (states[ix][iy].getOldState() != state)
 						count++;
 			}
 		}
