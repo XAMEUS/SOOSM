@@ -27,7 +27,7 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 		for (int x = 0; x < s.getSizeX(); x++) {
 			for (int y = 0; y < s.getSizeY(); y++) {
 				int count = s.numSameNeighbors(x, y, 1);
-				int state = s.getState(x, y).getOldState();
+				int state = s.getState(x, y);
 				if (state == 0 && count == 3) {
 					s.setState(x, y, 1);
 					addRect(x, y, 1);

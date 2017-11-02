@@ -33,8 +33,8 @@ public class States {
 		return sizeY;
 	}
 	
-	public State getState(int x, int y) {
-		return states[x][y];
+	public int getState(int x, int y) {
+		return states[x][y].getOldState();
 	}
 	
 	public int numState() {
