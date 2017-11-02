@@ -8,8 +8,8 @@ import gui.Rectangle;
 public abstract class CellularAutomaton {
 	
 	protected States s;
-	protected int minX, minY;
-	protected int rectSize;
+	private int minX, minY;
+	private int rectSize;
 	
 	public CellularAutomaton (int minX, int minY, int maxX, int maxY, int numRectRow, Color[] colors) {
 		if (minX >= maxX || minY >= maxY || minX < 0 || minY < 0 || maxX < 0 || maxY < 0 || numRectRow < 0)
@@ -39,12 +39,12 @@ public abstract class CellularAutomaton {
 		return new Rectangle(absX, absY, Color.black, s.getColor(state), rectSize);
 	}
 	
-	public int absoluteX(int x) {
-		return (x * rectSize + minX);
+	public int relativeX(int absoluteX) {
+		return (absoluteX - minX) / rectSize;
 	}
 	
-	public int absoluteY(int y) {
-		return (y * rectSize + minY);
+	public int relativeY(int absoluteY) {
+		return (absoluteY - minY) / rectSize;
 	}
 
 	public int getRectSize() {
