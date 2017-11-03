@@ -11,11 +11,11 @@ import gui.Simulable;
 import gui.GUISimulator;
 
 
-public class SchellingModel extends CellularAutomaton implements Simulable, Iterable<Rectangle> {
+public class SchellingModel extends CellularAutomaton implements Simulable, Iterable <Cell> {
 
 	private int k;
-	private List<Rectangle> taken;
-	private Queue<Rectangle> free;
+	private List<Cell> taken;
+	private Queue<Cell> free;
 	private GUISimulator gi;
 	
 	public SchellingModel (int minX, int minY, int maxX, int maxY, int numRectRow, int k, GUISimulator gi, Color[] colors) {
@@ -27,48 +27,58 @@ public class SchellingModel extends CellularAutomaton implements Simulable, Iter
 		initRect();
 	}
 	
+	@Override
 	public void addRect(int x, int y, int familyColor) {
 		Rectangle r = newRectangle(x, y, familyColor);
+		Cell c = new Cell(x, y, r);
 		if (familyColor == 0)
-			free.add(r);
-		else taken.add(r);
-		gi.addGraphicalElement(r);
+			free.add(c);
+		else taken.add(c);
+		gi.addGraphicalElement(c.r);
 	}
 	
-	private void move(Rectangle oldHouse, int relOldX, int relOldY, int familyColor) {
-		// quelques problemes de demenagements...
-		Rectangle newHouse = free.poll();
-		if (newHouse != null) {
-			int newX = newHouse.getX();
-			int newY = newHouse.getY();
-			int oldX = oldHouse.getX();
-			int oldY = oldHouse.getY();
-			oldHouse.translate(newX - oldX, newY - oldY);
-			newHouse.translate(oldX - newX, oldY - newY);
-			s.setState(relOldX, relOldY, 0);
-			s.setState(relativeX(newX), relativeY(newY), familyColor);
-			free.add(newHouse);
+	private void move(Cell takenLand, int familyColor) {
+		Cell freeLand = free.poll();
+		if (freeLand != null) {
+			int freeX = freeLand.r.getX();
+			int freeY = freeLand.r.getY();
+			int takenX = takenLand.r.getX();
+			int takenY = takenLand.r.getY();
+			freeLand.r.translate(takenX - freeX, takenY - freeY);
+			takenLand.r.translate(freeX - takenX, freeY - takenY);
+			
+			freeX = freeLand.getX();
+			freeY = freeLand.getY();
+			takenX = takenLand.getX();
+			takenY = takenLand.getY();
+			freeLand.setXY(takenX, takenY);
+			takenLand.setXY(freeX, freeY);
+			s.setState(freeX, freeY, familyColor);
+			s.setState(takenX, takenY, 0);
+			
+			free.add(freeLand);
 		}
 	}
 
 	@Override
 	public void next() {
-		for (Rectangle r : taken) {
-			int x = relativeX(r.getX());
-			int y = relativeY(r.getY());
+		for (Cell c : taken) {
+			int x = c.getX(), y = c.getY();
 			int familyColor = s.getState(x, y);
-			int count = s.numNeighbors(x, y, familyColor);
-			if ((9 - count) >= k)
-				move(r, x, y, familyColor);
+			int count = s.numDiffNeighbors(x, y, familyColor);
+			if (count >= k) {
+				move(c, familyColor);
+			}
 		}
+		s.finishUpdate();
 	}
 
 	@Override
-	public Iterator<Rectangle> iterator() {
-		List<Rectangle> allRectangles = new LinkedList<>();
-		allRectangles.addAll(taken);
-		allRectangles.addAll(free);
-		return allRectangles.iterator();
+	public Iterator<Cell> iterator() {
+		List<Cell> allCells = new LinkedList<>();
+		allCells.addAll(taken);
+		allCells.addAll(free);
+		return allCells.iterator();
 	}
 	
 	@Override

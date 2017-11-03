@@ -45,7 +45,19 @@ public class States {
 		int count = 0;
 		for (int ix = max(x-1, 0); ix <= min(x+1, sizeX-1); ix++) {
 			for (int iy = max(y-1, 0); iy <= min(y+1, sizeY-1); iy++) {
-					if (states[ix][iy].getOldState() == state)
+					if (getState(ix, iy) == state)
+						count++;
+			}
+		}
+		return count;
+	}
+	
+	public int numDiffNeighbors(int x, int y, int state) {
+		int count = 0, currState;
+		for (int ix = max(x-1, 0); ix <= min(x+1, sizeX-1); ix++) {
+			for (int iy = max(y-1, 0); iy <= min(y+1, sizeY-1); iy++) {
+					currState = getState(ix, iy);
+					if (currState != state && currState != 0)
 						count++;
 			}
 		}

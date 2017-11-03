@@ -16,7 +16,7 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 		initRect();
 	}
 
-	
+	@Override
 	public void addRect(int x, int y, int state) {
 		Rectangle r = newRectangle(x, y, state);
 		gi.addGraphicalElement(r);
