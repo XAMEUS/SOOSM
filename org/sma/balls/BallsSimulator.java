@@ -19,9 +19,9 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 		this.maxY = maxY;
 		this.balls = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
-			int x = this.maxX - this.minX;
-			int y = this.maxY - this.minY;
-			Ball b = new Ball((int)(this.minX + Math.random() * x), (int)(this.minY + Math.random() * y), Color.GREEN, Color.darkGray, 20);
+			int x = this.maxX - this.minX - 2 * Ball.getR();
+			int y = this.maxY - this.minY - 2 * Ball.getR();
+			Ball b = new Ball((int)(this.minX + Ball.getR() + Math.random() * x), (int)(this.minY + Ball.getR() + Math.random() * y), Color.GREEN, Color.darkGray);
 			b.setVelocity(1 - (int) (Math.random() * 2) * 2, 1 - (int) (Math.random() * 2) * 2);
 			this.balls.add(b);
 		}

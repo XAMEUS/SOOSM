@@ -14,7 +14,7 @@ public class Balls implements Iterable<Ball> {
 	public Balls(int n) {
 		this.balls = new ArrayList<>();
 		for (int i = 0; i < n; i++)
-			this.balls.add(new Ball((int)(Math.random() * 100), (int)(Math.random() * 100), Color.GREEN, Color.darkGray, 20));
+			this.balls.add(new Ball((int)(Math.random() * 100), (int)(Math.random() * 100), Color.GREEN, Color.darkGray));
 	}
 	
 	public void translate(int dx, int dy) {

@@ -8,8 +8,8 @@ public class TestBallsGUI {
 	
 	public static void main(String[] args) {
 		GUISimulator gi = new GUISimulator(800, 800, Color.darkGray);
-		BallsSimulator bs = new BallsSimulator(500, 10, 10, 790, 790);
-		gi.addGraphicalElement(new Rectangle(400, 400, Color.CYAN, Color.gray, 780));
+		BallsSimulator bs = new BallsSimulator(500, 0, 0, 800, 800);
+		gi.addGraphicalElement(new Rectangle(400, 400, Color.CYAN, Color.gray, 800));
 		gi.setSimulable(bs);
 		for (Ball b: bs)
 			gi.addGraphicalElement(b);
