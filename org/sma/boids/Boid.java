@@ -33,11 +33,19 @@ public class Boid implements GraphicalElement {
 		// TODO: rotate the shape instead of the Graphics2D?
 		AffineTransform save = g2d.getTransform();
 
+		g2d.translate(50, 50);
+		
+		g2d.rotate(Math.PI / 5);
+		g2d.setStroke(new BasicStroke(2));
+		g2d.setColor(Colors.color6);
+		g2d.drawLine((int) 0, 0, (int) (size * 1.5) + 50, 0);
+
+		g2d.setTransform(save);
 		g2d.translate(p.getX(), p.getY());
 		g2d.rotate(p.getAngle());
+
 		g2d.setColor(Colors.color1);
 		g2d.fill(shape);
-		g2d.setStroke(new BasicStroke(2));
 		g2d.setColor(Colors.color2);
 		g2d.draw(shape);
 

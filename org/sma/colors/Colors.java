@@ -8,4 +8,5 @@ public class Colors {
 	public static final Color color3 = new Color(23, 42, 58, 255);
 	public static final Color color4 = new Color(0, 67, 70, 255);
 	public static final Color color5 = new Color(9, 188, 138, 255);
+	public static final Color color6 = new Color(252, 119, 83, 255);
 }
