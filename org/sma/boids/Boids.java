@@ -8,10 +8,10 @@ public class Boids {
 	private List<Boid> boidsInit;
 	private List<Boid> boids;
 	
-	public Boids(int n, int maxx, int maxy, int max_speed) {
+	public Boids(int n, int minx, int miny, int maxx, int maxy, int max_speed) {
 		this.boids = new ArrayList<>();
 		for (int i = 0; i < n; i++)
-			this.boids.add(new Boid((int)(Math.random() * maxx), (int)(Math.random() * maxy), (int)(Math.random() * max_speed), (int)(Math.random() * max_speed)));
+			this.boids.add(new Boid((int)(Math.random() * (maxx - minx)) + minx, (int)(Math.random() * (maxy - minx)) + minx, (int)(Math.random() * max_speed), (int)(Math.random() * max_speed)));
 		this.boidsInit = new ArrayList<>(boids);
 	}
 	
