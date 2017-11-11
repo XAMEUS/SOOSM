@@ -2,16 +2,24 @@ package org.sma.cells;
 
 import gui.Rectangle;
 
+
+/**
+ * Classe représentant une cellule dans le modèle de Schelling.
+ * @see ShellingModel
+ * 
+ * @author 3
+ *
+ */
 public class Cell {
 	
-	private int x;
-	private int y;
-	Rectangle r;
+	private int x, y;
 	
-	public Cell (int x, int y, Rectangle r) {
+	private Rectangle rect;
+	
+	public Cell(int x, int y, Rectangle rect) {
 		this.x = x;
 		this.y = y;
-		this.r = r;
+		this.rect = rect;
 	}
 	
 	public int getX() {
@@ -20,6 +28,22 @@ public class Cell {
 	
 	public int getY() {
 		return y;
+	}
+	
+	public Rectangle getRect() {
+		return rect;
+	}
+	
+	public int getRectX() {
+		return rect.getX();
+	}
+	
+	public int getRectY() {
+		return rect.getY();
+	}
+	
+	public void translate(int rectX, int rectY) {
+		rect.translate(rectX, rectY);
 	}
 	
 	public void setXY(int x, int y) {

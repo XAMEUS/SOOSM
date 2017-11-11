@@ -1,9 +1,19 @@
 package org.sma.cells;
 
 import java.awt.Color;
-
 import gui.GUISimulator;
 
+/**
+ * Classe représentant une Jeu de la Vie à plus de deux état, dit Jeu de l'Immigration.
+ * Les règles sont les suivantes :
+ * <ul>
+ * <li> Chaque cellule de la grille peut prendre n états. </li>
+ * <li> Une cellule à l'état k peut passer à l'état k+1 (mod n) si elle a au moins 3 voisines dans cet état. </li>
+ * </ul>
+ * @see GameOfLife
+ * @author 3
+ *
+ */
 public class ImmigrationGame extends GameOfLife {
 
 	public ImmigrationGame(int minX, int minY, int maxX, int maxY, int numRectRow, GUISimulator gi, Color[] colors) {

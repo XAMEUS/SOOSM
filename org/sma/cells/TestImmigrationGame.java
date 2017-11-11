@@ -1,9 +1,15 @@
 package org.sma.cells;
 
 import java.awt.Color;
-
 import gui.GUISimulator;
 
+
+/**
+ * Test du Jeu de l'Immigration.
+ * @see ImmagrationGame
+ * @author 3
+ *
+ */
 public class TestImmigrationGame {
 
 	public static void main(String[] args) {

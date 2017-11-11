@@ -1,9 +1,15 @@
 package org.sma.cells;
 
 import java.awt.Color;
-
 import gui.GUISimulator;
 
+
+/**
+ * Test du Jeu de la Vie.
+ * @see GameOfLife
+ * @author 3
+ *
+ */
 public class TestGameOfLife {
 
 	public static void main(String[] args) {

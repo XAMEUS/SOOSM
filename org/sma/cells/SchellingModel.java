@@ -10,13 +10,42 @@ import gui.Rectangle;
 import gui.Simulable;
 import gui.GUISimulator;
 
-
+/**
+ * Classe représentant un automate cellulaire de type Modèle de Schelling.
+ * Les règles sont les suivantes :
+ * <ul>
+ * <li> Chaque cellule représente une habitation. </li>
+ * <li> Une habitation peut être vacante ou habitée par une famille de couleur c. </li>
+ * <li> Si une famille de couleur c a plus de k voisins de couleur différentes
+ * (ie non égale à la sienne), elle déménage dans une habitation vacante.
+ * Son habitation précédente devient alors vacante. </li>
+ * </ul>
+ * @author 3
+ *
+ */
 public class SchellingModel extends CellularAutomaton implements Simulable, Iterable <Cell> {
 
+	/**
+	 * Seuil de déménagement : 
+	 * nombre de voisins de couleurs différentes maximum avant déménagement.
+	 */
 	private int k;
+	
+	/**
+	 * Liste des habitations prises.
+	 */
 	private List<Cell> taken;
+	
+	/**
+	 * File de priorité des habitations vacantes.
+	 */
 	private Queue<Cell> free;
+	
+	/**
+	 * GUISimulator.
+	 */
 	private GUISimulator gi;
+	
 	
 	public SchellingModel (int minX, int minY, int maxX, int maxY, int numRectRow, int k, GUISimulator gi, Color[] colors) {
 		super(minX, minY, maxX, maxY, numRectRow, colors);
@@ -34,18 +63,23 @@ public class SchellingModel extends CellularAutomaton implements Simulable, Iter
 		if (familyColor == 0)
 			free.add(c);
 		else taken.add(c);
-		gi.addGraphicalElement(c.r);
+		gi.addGraphicalElement(c.getRect());
 	}
 	
+	/**
+	 * Déménage une famille dans une nouvelle habitation vacante.
+	 * @param takenLand Habitation courante de la famille.
+	 * @param familyColor Couleur de la famille.
+	 */
 	private void move(Cell takenLand, int familyColor) {
 		Cell freeLand = free.poll();
 		if (freeLand != null) {
-			int freeX = freeLand.r.getX();
-			int freeY = freeLand.r.getY();
-			int takenX = takenLand.r.getX();
-			int takenY = takenLand.r.getY();
-			freeLand.r.translate(takenX - freeX, takenY - freeY);
-			takenLand.r.translate(freeX - takenX, freeY - takenY);
+			int freeX = freeLand.getRectX();
+			int freeY = freeLand.getRectY();
+			int takenX = takenLand.getRectX();
+			int takenY = takenLand.getRectY();
+			freeLand.translate(takenX - freeX, takenY - freeY);
+			takenLand.translate(freeX - takenX, freeY - takenY);
 			
 			freeX = freeLand.getX();
 			freeY = freeLand.getY();
