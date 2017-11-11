@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Boids {
+public class Boids implements Iterable<Boid> {
 	private List<Boid> boidsInit;
 	private List<Boid> boids;
 	
@@ -73,5 +73,10 @@ public class Boids {
 			return new Vect(0, 0);
 		nPos.mult(coef / ((double) nbVois));
 		return nPos;
+	}
+
+	@Override
+	public Iterator<Boid> iterator() {
+		return this.boids.iterator();
 	}
 }
