@@ -38,6 +38,12 @@ public class Vect {
 		this.x = Vect.x(angle, length);
 		this.y = Vect.y(angle, length);
 	}
+	
+	public boolean angleInRange(Vect v, double range) {
+		double base = (this.angle % ( 2 * Math.PI)) + 2 * Math.PI;
+		double candidate = (v.getAngle() % ( 2 * Math.PI)) + 2 * Math.PI;
+		return base - range <= candidate && candidate <= base + range;		
+	}
 
 	public int getX() {
 		return x;

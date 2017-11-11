@@ -15,6 +15,7 @@ public class Boid implements GraphicalElement {
 	static final Path2D shape = new Path2D.Double();
 	static final int size = 50;
 	static int maxDSq = 10;
+	static double maxAngle = Math.PI;
 	Vect p, v, a;
 
 	static {
@@ -43,9 +44,7 @@ public class Boid implements GraphicalElement {
 	}
 
 	public boolean isVisible(Boid b) {
-		if(this.getP().distanceSq(b.getP()) >= maxDSq)
-			return false;
-		return true;
+		return this.getP().distanceSq(b.getP()) >= maxDSq && this.getP().angleInRange(b.getP(), Boid.maxAngle);
 	}
 
 	@Override
