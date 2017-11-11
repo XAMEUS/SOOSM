@@ -1,8 +1,8 @@
 package org.sma.boids;
 
 public class Vect {
-	private int x = 0;
-	private int y = 0;
+	private double x = 0;
+	private double y = 0;
 	private double angle = 0;
 	private double length = 0;
 	
@@ -13,12 +13,8 @@ public class Vect {
 		this.length = v.getLength();
 	}
 
-	public Vect(int x, int y) {
+	public Vect(double x, double y) {
 		this.setCart(x, y);
-	}
-
-	public Vect(double angle, double length) {
-		this.setPol(angle, length);
 	}
 	
 	public Vect translate(Vect v) {
@@ -31,7 +27,16 @@ public class Vect {
 		this.setPol(this.angle, this.length * scal);
 	}
 	
-	public void setCart(int x, int y) {
+	public void invert() {
+		if(this.x != 0 && this.y != 0)
+			this.setCart(1 / this.x, 1 / this.y);
+	}
+	
+	public void power(double scal) {
+		this.setCart(Math.pow(this.x, scal), Math.pow(this.y, scal));
+	}
+	
+	public void setCart(double x, double y) {
 		this.x = x;
 		this.y = y;
 		this.angle = Vect.angle(x, y);
@@ -51,11 +56,11 @@ public class Vect {
 		return base - range <= candidate && candidate <= base + range;		
 	}
 
-	public int getX() {
+	public double getX() {
 		return x;
 	}
 
-	public int getY() {
+	public double getY() {
 		return y;
 	}
 
@@ -67,19 +72,19 @@ public class Vect {
 		return length;
 	}
 	
-	public int distanceSq(Vect b) {
+	public double distanceSq(Vect b) {
 		return (this.x - b.x) * (this.x - b.x) + (this.y - b.y) * (this.y - b.y);
 	}
 	
-	static int distanceSq(int x, int y) {
+	static double distanceSq(double x, double y) {
 		return x * x + y * y;
 	}
 
-	static double distance(int x, int y) {
+	static double distance(double x, double y) {
 		return Math.sqrt((double) distanceSq(x, y));
 	}
 
-	static double angle(int x, int y) {
+	static double angle(double x, double y) {
 		if (x != 0)
 			return Math.atan(y / x) + (x > 0 ? 0 : 1) * (y >= 0 ? 1 : -1)
 					* Math.PI;
@@ -89,11 +94,11 @@ public class Vect {
 			return 0.;
 	}
 
-	static int x(double angle, double length) {
-		return (int) (length * Math.cos(angle));
+	static double x(double angle, double length) {
+		return (double) (length * Math.cos(angle));
 	}
 
-	static int y(double angle, double length) {
-		return (int) (length * Math.sin(angle));
+	static double y(double angle, double length) {
+		return (double) (length * Math.sin(angle));
 	}
 }

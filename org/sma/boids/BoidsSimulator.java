@@ -9,7 +9,7 @@ public class BoidsSimulator implements Simulable {
 	private GUISimulator gi;
 	
 	public BoidsSimulator(GUISimulator gi) {
-		this.boids = new Boids(10, 400, 400, 10);
+		this.boids = new Boids(50, 0, 0, 800, 800, 10);
 		this.gi = gi;
 		for (Boid b : this.boids)
 			this.gi.addGraphicalElement(b);
