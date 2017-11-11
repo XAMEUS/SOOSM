@@ -5,13 +5,14 @@ import java.util.Iterator;
 import java.util.List;
 
 public class Boids {
-	public List<Boid> boids;
-	public List<Boid> n_boids;
+	private List<Boid> boidsInit;
+	private List<Boid> boids;
 	
 	public Boids(int n, int maxx, int maxy, int max_speed) {
 		this.boids = new ArrayList<>();
 		for (int i = 0; i < n; i++)
 			this.boids.add(new Boid((int)(Math.random() * maxx), (int)(Math.random() * maxy), (int)(Math.random() * max_speed), (int)(Math.random() * max_speed)));
+		this.boidsInit = new ArrayList<>(boids);
 	}
 	
 	public Iterator<Boid> getNeighbors(Boid boid) {
@@ -19,16 +20,20 @@ public class Boids {
 	}
 	
 	public void nextStep() {
-		this.n_boids = new ArrayList<>();
+		List<Boid> nBoids = new ArrayList<>();
 		for(int i = 0; i < boids.size(); i++) {
 			Boid b = boids.get(i);
 			Vect a = cohesion(b).translate(alignment(b)).translate(separation(b));
 			a.mult(Boid.getWeight());
 			Vect v = b.getV().translate(a);
 			Vect p = b.getP().translate(v);
-			this.n_boids.add(new Boid(p, v, a));
+			nBoids.add(new Boid(p, v, a));
 		}
-		boids = n_boids;
+		this.boids = nBoids;
+	}
+	
+	public void reInit() {
+		this.boids = new ArrayList<>(boidsInit);
 	}
 	
 	public Vect cohesion(Boid b) {
