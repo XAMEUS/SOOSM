@@ -4,10 +4,27 @@ import java.awt.Color;
 
 import gui.Oval;
 
+
+/**
+ * Classe représentant une balle.
+ * @author julie
+ *
+ */
 public class Ball extends Oval {
 
+	/**
+	 * Coordonnée de la balle.
+	 */
 	private int xOri, yOri;
+	
+	/**
+	 * Coordonnée du vecteur vitesse de la balle.
+	 */
 	private int vx, vy;
+	
+	/**
+	 * Rayon par défaut d'une balle.
+	 */
 	private static int R = 10;
 
 	public Ball(int x, int y, Color drawColor, Color fillColor, int size) {
@@ -31,6 +48,14 @@ public class Ball extends Oval {
 		this.vy = 4 * vy;
 	}
 
+	/**
+	 * Translate la balle.
+	 * Rebondit si elle dépasse les bornes.
+	 * @param minX
+	 * @param maxX
+	 * @param minY
+	 * @param maxY
+	 */
 	public void update(int minX, int maxX, int minY, int maxY) {
 		super.translate(this.vx, this.vy);
 		if (this.getX() - Ball.R < minX)
@@ -43,6 +68,9 @@ public class Ball extends Oval {
 			this.vy = -this.vy;
 	}
 
+	/**
+	 * Place la balle à sa position initiale.
+	 */
 	public void init() {
 		this.translate(this.xOri - this.getX(), this.yOri - this.getY());
 	}
