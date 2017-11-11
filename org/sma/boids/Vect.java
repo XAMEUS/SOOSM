@@ -5,6 +5,13 @@ public class Vect {
 	private int y = 0;
 	private double angle = 0;
 	private double length = 0;
+	
+	public Vect(Vect v) {
+		this.x = v.getX();
+		this.y = v.getY();
+		this.angle = v.getAngle();
+		this.length = v.getLength();
+	}
 
 	public Vect(int x, int y) {
 		this.setCart(x, y);
@@ -13,31 +20,11 @@ public class Vect {
 	public Vect(double angle, double length) {
 		this.setPol(angle, length);
 	}
-
-	static int distanceSq(int x, int y) {
-		return x * x + y * y;
+	
+	public void translate(Vect v) {
+		setCart(this.x + v.getX(), this.y + v.getY());
 	}
-
-	static double distance(int x, int y) {
-		return Math.sqrt((double) distanceSq(x, y));
-	}
-
-	static double angle(int x, int y) {
-		if (x != 0)
-			return Math.atan(y / x) + (x > 0 ? 1 : 0) * (y >= 0 ? 1 : -1)
-					* Math.PI;
-		else
-			return (y >= 0 ? 1 : -1) * Math.PI / 2;
-	}
-
-	static int x(double angle, double length) {
-		return (int) (length * Math.cos(angle));
-	}
-
-	static int y(double angle, double length) {
-		return (int) (length * Math.sin(angle));
-	}
-
+	
 	public void setCart(int x, int y) {
 		this.x = x;
 		this.y = y;
@@ -50,10 +37,6 @@ public class Vect {
 		this.length = length;
 		this.x = Vect.x(angle, length);
 		this.y = Vect.y(angle, length);
-	}
-
-	public void translate(Vect v) {
-		setCart(this.x + v.getX(), this.y + v.getY());
 	}
 
 	public int getX() {
@@ -70,5 +53,31 @@ public class Vect {
 
 	public double getLength() {
 		return length;
+	}
+	
+	static int distanceSq(int x, int y) {
+		return x * x + y * y;
+	}
+
+	static double distance(int x, int y) {
+		return Math.sqrt((double) distanceSq(x, y));
+	}
+
+	static double angle(int x, int y) {
+		if (x != 0)
+			return Math.atan(y / x) + (x > 0 ? 1 : 0) * (y >= 0 ? 1 : -1)
+					* Math.PI;
+		else if (y != 0)
+			return (y >= 0 ? 1 : -1) * Math.PI / 2;
+		else
+			return 0.;
+	}
+
+	static int x(double angle, double length) {
+		return (int) (length * Math.cos(angle));
+	}
+
+	static int y(double angle, double length) {
+		return (int) (length * Math.sin(angle));
 	}
 }
