@@ -7,9 +7,21 @@ import java.util.List;
 
 import gui.Simulable;
 
+/**
+ * Classe représentant un simulateur de Ball.
+ * @author julie
+ *
+ */
 public class BallsSimulator implements Simulable, Iterable<Ball> {
 
+	/**
+	 * Liste des Ball du simulateur.
+	 */
 	private List<Ball> balls;
+	
+	/**
+	 * Borne de la zone de simulation en pixels.
+	 */
 	private int minX, minY, maxX, maxY;
 
 	public BallsSimulator(int n, int minX, int minY, int maxX, int maxY) {
