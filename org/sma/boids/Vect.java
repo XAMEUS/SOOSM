@@ -55,6 +55,10 @@ public class Vect {
 		return length;
 	}
 	
+	public int distanceSq(Vect b) {
+		return (this.x - b.x) * (this.x - b.x) + (this.y - b.y) * (this.y - b.y);
+	}
+	
 	static int distanceSq(int x, int y) {
 		return x * x + y * y;
 	}
