@@ -17,4 +17,12 @@ public class Boids {
 	public Iterator<Boid> getNeighbors(Boid boid) {
 		return this.boids.stream().filter(x -> boid.isVisible(x)).iterator();
 	}
+	
+	public void nextStep() {
+		this.n_boids = new ArrayList<>();
+		for(int i = 0; i < boids.size(); i++) {
+			this.n_boids.add(2);
+		}
+		boids = n_boids;
+	}
 }
