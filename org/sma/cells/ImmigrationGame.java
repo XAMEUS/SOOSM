@@ -22,17 +22,18 @@ public class ImmigrationGame extends GameOfLife {
 
 	@Override
 	public void next() {
+		gi.reset();
 		for (int x = 0; x < s.getSizeX(); x++) {
 			for (int y = 0; y < s.getSizeY(); y++) {
 				int nextState = (s.getState(x, y)+1) % s.numState();
 				int count = s.numNeighbors(x, y, nextState);
 				if (count >= 3) {
 					s.setState(x, y, nextState);
-					addRect(x, y, nextState);
 				}
+				addRect(x, y, s.getState(x, y));
 			}
 		}
-		this.s.finishUpdate();
+		s.finishUpdate();
 	}
 	
 }

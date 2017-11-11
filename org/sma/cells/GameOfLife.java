@@ -22,7 +22,7 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 	/**
 	 * GUISimulator.
 	 */
-	private GUISimulator gi;
+	protected GUISimulator gi;
 	
 	public GameOfLife (int minX, int minY, int maxX, int maxY, int numRectRow, GUISimulator gi, Color[] colors) {
 		super(minX, minY, maxX, maxY, numRectRow, colors);
@@ -38,17 +38,19 @@ public class GameOfLife extends CellularAutomaton implements Simulable {
 	
 	@Override
 	public void next() {
+		gi.reset();
 		for (int x = 0; x < s.getSizeX(); x++) {
 			for (int y = 0; y < s.getSizeY(); y++) {
 				int count = s.numNeighbors(x, y, 1);
 				int state = s.getState(x, y);
 				if (state == 0 && count == 3) {
 					s.setState(x, y, 1);
-					addRect(x, y, 1);
+					state = 1;
 				} else if (state == 1 && count != 3 && count !=  4) {
 					s.setState(x, y, 0);
-					addRect(x, y, 0);
+					state = 0;
 				}
+				addRect(x, y, state);
 			}
 		}
 		s.finishUpdate();
