@@ -13,6 +13,7 @@ public class Boid implements GraphicalElement {
 
 	static final Path2D shape = new Path2D.Double();
 	static final int size = 50;
+	Vect p, v, a;
 
 	static {
 		shape.moveTo(-size / 2, -size / 2);
@@ -21,8 +22,10 @@ public class Boid implements GraphicalElement {
 		shape.closePath();
 	}
 	
-	public Boid() {
-		// TODO Auto-generated constructor stub
+	public Boid(int x, int y, int vx, int vy) {
+		p = new Vect(x, y);
+		v = new Vect(vx, vy);
+		a = new Vect(0, 0);
 	}
 
 	@Override
@@ -38,18 +41,18 @@ public class Boid implements GraphicalElement {
 		g2d.drawLine((int) 0, 0, (int) (size * 1.5) + 50, 0);
 
 		g2d.setTransform(save);
-		g2d.translate(50, 50);
-		g2d.rotate(0);
-		
+		g2d.translate(p.getX(), p.getY());
+		g2d.rotate(p.getAngle());
+
 		g2d.setColor(Colors.color1);
 		g2d.fill(shape);
 		g2d.setColor(Colors.color2);
 		g2d.draw(shape);
 
-		// show acceleration
+		// show speed
 		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(Colors.color5);
-		g2d.drawLine((int) (size * 1.5), 0, (int) (size * 1.5) + 50, 0);
+		g2d.drawLine((int) (size * 1.5), 0, (int) (size * 1.5) + (int) v.getLength(), 0);
 
 		g2d.setTransform(save);
 	}
