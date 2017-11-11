@@ -14,7 +14,7 @@ public class Boid implements GraphicalElement {
 
 	static final Path2D shape = new Path2D.Double();
 	static final int size = 50;
-	static int maxDSq = 50;
+	static int maxDSq = 50 * 50;
 	static double maxAngle = Math.PI / 2;
 	static double weight = 0.3;
 	public static double getWeight() {
@@ -55,7 +55,7 @@ public class Boid implements GraphicalElement {
 	}
 
 	public boolean isVisible(Boid b) {
-		return this.getP().distanceSq(b.getP()) <= maxDSq && this.getP().angleInRange(b.getP(), Boid.maxAngle);
+		return this.getP().distanceSq(b.getP()) <= maxDSq && this.getV().angleInRange(b.getV(), Boid.maxAngle);
 	}
 
 	@Override
@@ -63,12 +63,8 @@ public class Boid implements GraphicalElement {
 		// TODO: rotate the shape instead of the Graphics2D?
 		AffineTransform save = g2d.getTransform();
 
-		g2d.setStroke(new BasicStroke(2));
-		g2d.setColor(Colors.color6);
-		g2d.drawLine(p.getX(), p.getY(), a.getX(), a.getY());
-
 		g2d.translate(p.getX(), p.getY());
-		g2d.rotate(p.getAngle());
+		g2d.rotate(v.getAngle());
 
 		g2d.setColor(Colors.color1);
 		g2d.fill(shape);
@@ -81,6 +77,10 @@ public class Boid implements GraphicalElement {
 		g2d.drawLine((int) (size * 1.5), 0, (int) (size * 1.5) + (int) v.getLength(), 0);
 
 		g2d.setTransform(save);
+		
+		g2d.setStroke(new BasicStroke(2));
+		g2d.setColor(Colors.color6);
+		g2d.drawLine(p.getX(), p.getY(), a.getX() + p.getX(), a.getY() + p.getY());
 	}
 
 }

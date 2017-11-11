@@ -81,7 +81,7 @@ public class Vect {
 
 	static double angle(int x, int y) {
 		if (x != 0)
-			return Math.atan(y / x) + (x > 0 ? 1 : 0) * (y >= 0 ? 1 : -1)
+			return Math.atan(y / x) + (x > 0 ? 0 : 1) * (y >= 0 ? 1 : -1)
 					* Math.PI;
 		else if (y != 0)
 			return (y >= 0 ? 1 : -1) * Math.PI / 2;
