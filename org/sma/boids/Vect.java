@@ -21,8 +21,14 @@ public class Vect {
 		this.setPol(angle, length);
 	}
 	
-	public void translate(Vect v) {
-		setCart(this.x + v.getX(), this.y + v.getY());
+	public Vect translate(Vect v) {
+		Vect n = new Vect(this);
+		n.setCart(this.x + v.getX(), this.y + v.getY());
+		return n;
+	}
+	
+	public void mult(double scal) {
+		this.setPol(this.angle, this.length * scal);
 	}
 	
 	public void setCart(int x, int y) {

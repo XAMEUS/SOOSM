@@ -16,6 +16,11 @@ public class Boid implements GraphicalElement {
 	static final int size = 50;
 	static int maxDSq = 50;
 	static double maxAngle = Math.PI / 2;
+	static double weight = 0.3;
+	public static double getWeight() {
+		return weight;
+	}
+
 	Vect p, v, a;
 
 	static {
@@ -29,6 +34,12 @@ public class Boid implements GraphicalElement {
 		p = new Vect(x, y);
 		v = new Vect(vx, vy);
 		a = new Vect(0, 0);
+	}
+	
+	public Boid(Vect p, Vect v, Vect a) {
+		this.p = p;
+		this.v = v;
+		this.a = a;
 	}
 	
 	public Vect getP() {
