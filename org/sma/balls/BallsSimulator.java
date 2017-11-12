@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.sma.events.Event;
+import org.sma.events.EventManager;
+
 import gui.Simulable;
 
 /**
@@ -23,6 +26,19 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 	 * Borne de la zone de simulation en pixels.
 	 */
 	private int minX, minY, maxX, maxY;
+	private EventManager em;
+	
+	private class UpdateBalls extends Event {
+		public UpdateBalls(long date) {
+			super(date);
+		}
+		@Override
+		public void execute() {
+			for (Ball b : BallsSimulator.this.balls)
+				b.update(BallsSimulator.this.minX, BallsSimulator.this.maxX, BallsSimulator.this.minY, BallsSimulator.this.maxY);
+			BallsSimulator.this.em.addEvent(new UpdateBalls(this.getDate()+1));
+		}
+	}
 
 	public BallsSimulator(int n, int minX, int minY, int maxX, int maxY) {
 		this.minX = minX;
@@ -37,12 +53,13 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 			b.setVelocity(1 - (int) (Math.random() * 2) * 2, 1 - (int) (Math.random() * 2) * 2);
 			this.balls.add(b);
 		}
+		em = new EventManager();
+		em.addEvent(new UpdateBalls(1));
 	}
 
 	@Override
 	public void next() {
-		for (Ball b : this.balls)
-			b.update(this.minX, this.maxX, this.minY, this.maxY);
+		this.em.next();
 	}
 
 	@Override
