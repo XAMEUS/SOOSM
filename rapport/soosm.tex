@@ -60,9 +60,9 @@ Pour ces deux automates, on réinitialise l'affichage graphique à chaque étape
 
 \subsubsection*{\textit{SchellingModel}}
 
-Les habitations sont représentées par des \textit{Rectangle}. La couleur des habitants est représentée par son état dans la grille de \textit{States}. Un état égal à zéro représente une habitation vacante. Les habitations occupées sont conservées dans une liste et les habitations vacantes dans une file de priorité.
+Les habitations sont représentées par des \textit{Cell}. Une \textit{Cell} est composée de ses coordonnées dans la matrice d'états de \textit{States} et de son \textit{Rectangle}. La couleur des habitants est représentée par son état dans la grille de \textit{States}. Un état égal à zéro représente une habitation vacante. Les habitations occupées sont conservées dans une liste et les habitations vacantes dans une file de priorité.
 
-A chaque étape de la simulation, on parcours la liste, calcule le nombre de voisins et éventuellement déménage la famille. Le déménagement s'effectue par une translation des \textit{Rectangle} représentant l'habitation occupée et celle vacante récupérée dans la file, chacune à la place de l'autre. L'habitation vacante qui se situe maintenant à la place de l'ancienne habitation occupée est replacée dans la file.
+A chaque étape de la simulation, on parcours la liste, calcule le nombre de voisins et éventuellement déménage la famille. Le déménagement s'effectue par une translation des \textit{Cell} représentant l'habitation occupée et l'habitation vacante récupérée dans la file, chacune à la place de l'autre. L'habitation vacante qui se situe maintenant à la place de l'ancienne habitation occupée est replacée dans la file.
 
 
 \subsection*{Tests effectués}
