@@ -39,7 +39,7 @@ public class Boids implements Iterable<Boid> {
 		this.maxx = maxx;
 		this.maxy = maxy;
 		this.maxSpeed = max_speed;
-		this.setCohesion(10, 500, 0.001, 10);
+		this.setCohesion(1, 500, 0.001, 10);
 		this.setAlignment(1, 500);
 		this.setSeparation(10, 50, 1);
 		this.setKeeper(0.1, 0.01);

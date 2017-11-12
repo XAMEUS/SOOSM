@@ -11,7 +11,7 @@ public class BoidsSimulator extends Simulator {
 	private GUISimulator gi;
 	
 	public BoidsSimulator(GUISimulator gi) {
-		this.boids = new Boids(20, 0, 0, 1000, 1000, 10);
+		this.boids = new Boids(20, 0, 0, 1000, 1000, 20);
 		this.gi = gi;
 		for (Boid b : this.boids)
 			this.gi.addGraphicalElement(b);
