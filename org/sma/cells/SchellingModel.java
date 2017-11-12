@@ -3,7 +3,6 @@ package org.sma.cells;
 import java.awt.Color;
 import java.util.Queue;
 import java.util.List;
-import java.util.Iterator;
 import java.util.LinkedList;
 
 import gui.Rectangle;
@@ -23,7 +22,7 @@ import gui.GUISimulator;
  * @author 3
  *
  */
-public class SchellingModel extends CellularAutomaton implements Simulable, Iterable <Cell> {
+public class SchellingModel extends CellularAutomaton implements Simulable {
 
 	/**
 	 * Seuil de déménagement : 
@@ -105,14 +104,6 @@ public class SchellingModel extends CellularAutomaton implements Simulable, Iter
 			}
 		}
 		s.finishUpdate();
-	}
-
-	@Override
-	public Iterator<Cell> iterator() {
-		List<Cell> allCells = new LinkedList<>();
-		allCells.addAll(taken);
-		allCells.addAll(free);
-		return allCells.iterator();
 	}
 	
 	@Override
