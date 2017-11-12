@@ -1,0 +1,85 @@
+\documentclass[a4paper, 11pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{blindtext}
+\usepackage{fullpage}
+\usepackage{xspace}
+\usepackage{verbatim}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{url}
+\usepackage{float}
+\usepackage{caption}
+
+\title{Simulation Orientée-Objet de systèmes multiagents}
+\author{Equipe 3}
+\date{Novembre 2017}
+
+\begin{document}
+
+\maketitle
+
+\section{Simulateur de balles}
+
+\subsection*{Choix de conception}
+
+Le simulateur de balles est représenté par la classe \textit{BallsSimulator} et réalise l'interface \textit{Simulable}. Cette classe conserve une liste des balles \textit{Ball} initialisées aléatoirement et à simuler. On utilise le gestionnaire d'événements par la classe interne \textit{UpdateBalls}.
+
+\subsection*{Tests effectués}
+
+\textit{TestBalls} : affiche une liste de \textit{Ball} dans la console.
+
+\textit{TestBallGUI} : simulation de balles. Lorsqu'une balle touche un bord, elle rebondit.
+
+\section{Automates cellulaires}
+
+\subsection*{Choix de conception}
+
+La classe abstraite \textit{CellularAutomaton} représente un système de type automate cellulaire. Les automates cellulaires Jeu de la Vie de Conway et Modèle de Schelling en sont des classes dérivées, respectivement \textit{GameOfLife} et \textit{SchellingModel}. Le Jeu de l'Immigration est représenté par la classe \textit{ImmigrationGame} et est dérivé du Jeu de la Vie. Les trois classes d'automates cellulaires réalisent l'interface \textit{Simulable}. Tous ces automates sont initialisés de manière aléatoire.
+
+\subsubsection*{\textit{States}}
+
+Cette classe permet la gestion de la grille de cellules et l'association des états aux \textit{Color}.
+
+La grille est conservée sous forme d'une matrice d'états \textit{State} dans la classe \textit{States}. La classe \textit{State} conserve l'état initial d'une cellule ainsi que son ancien et son nouvel état relativement au temps \textit{t} de la simulation. Cela permet d'éviter une éventuelle perte d'information si l'on modifiait l'état des cellules de la grille "à la volée". On calcule le nombre de voisins grâce à ses états.
+
+La classe \textit{States} conserve également un tableau de \textit{Color} donné en paramètre par l'utilisateur à l'initialisation. Un état correspond à un indice du tableau et on peut donc associer chaque état à une \textit{Color}.
+
+\subsubsection*{\textit{CellularAutomaton}}
+
+Cette classe regroupe les fonctions communes à tous les automates cellulaires : initialisation et ré-initialisation de la grille de cellules. Cette classe conserve également le positionnement de la grille en pixels et permet de faire le lien entre la matrice d'états conservée dans \textit{States} et la grille affichée.
+
+\subsubsection*{\textit{GameOfLife} \& \textit{ImmigrationGame}}
+
+Pour ces deux automates, on réinitialise l'affichage graphique à chaque étape de la simulation. Comme on ne peut pas changer la couleur d'un \textit{Rectangle}, on les recrée tous au fur et à mesure que l'on met à jour leur état. Même si après quelques itérations, il y peu de cellules qui continue à changer d'état dans le Jeu de la Vie, nous avons décidé de réinitialiser l'affichage plutôt que de rajouter des \textit{Rectangle} par dessus les cellules changeant d'état. Cela permet d'éviter qu'il y est une accumulation du nombre d'objets à afficher et donc de réduire l'impact mémoire. De plus il n'y a pas de latence à l'affichage avec cette méthode.
+
+\subsubsection*{\textit{SchellingModel}}
+
+Les habitations sont représentées par des \textit{Rectangle}. La couleur des habitants est représentée par son état dans la grille de \textit{States}. Un état égal à zéro représente une habitation vacante. Les habitations occupées sont conservées dans une liste et les habitations vacantes dans une file de priorité.
+
+A chaque étape de la simulation, on parcours la liste, calcule le nombre de voisins et éventuellement déménage la famille. Le déménagement s'effectue par une translation des \textit{Rectangle} représentant l'habitation occupée et celle vacante récupérée dans la file, chacune à la place de l'autre. L'habitation vacante qui se situe maintenant à la place de l'ancienne habitation occupée est replacée dans la file.
+
+
+\subsection*{Tests effectués}
+
+\textit{TestGameOfLife} : simulation d'un Jeu de la Vie de Conway. Les cellules vivantes sont en bleu et les cellules mortes en blanc.
+
+\textit{TestImmigrationGame} : simulation d'un Jeu de l'Immigration. Le cycle de couleur est : blanc $\rightarrow$ jaune $\rightarrow$ orange $\rightarrow$ rouge $\rightarrow$ blanc $\rightarrow$ etc.
+
+\textit{TestSchellingModel} : simulation du Modèle de Schelling. On utilise dans cette simulation 5 couleurs (rouge, bleu, vert, jaune, rose) et un seuil $k$ = 5. On remarque que même au seuil $k$ = 7, de petites communautés de même couleur se forme. Plus $k$ est petit, plus ces communautés sont grosses et tendent à être unique pour chaque couleur.
+
+\section{Modèle des boids}
+
+\subsection*{Choix de conception}
+
+
+\subsection*{Tests effectués}
+
+
+
+\end{document}
