@@ -78,6 +78,10 @@ public class Boids implements Iterable<Boid> {
 		return this.boids.stream().filter(x -> boid.isVisible(x, maxDist)).iterator();
 	}
 	
+	public List<Boid> getBoids() {
+		return boids;
+	}
+	
 	public void nextStep() {
 		List<Boid> nBoids = new ArrayList<>();
 		for(int i = 0; i < boids.size(); i++) {
