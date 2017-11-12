@@ -7,15 +7,14 @@ import java.util.List;
 
 import org.sma.events.Event;
 import org.sma.events.EventManager;
-
-import gui.Simulable;
+import org.sma.simulator.Simulator;
 
 /**
  * Classe représentant un simulateur de Ball.
  * @author julie
  *
  */
-public class BallsSimulator implements Simulable, Iterable<Ball> {
+public class BallsSimulator extends Simulator implements Iterable<Ball> {
 
 	/**
 	 * Liste des Ball du simulateur.
@@ -26,7 +25,6 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 	 * Borne de la zone de simulation en pixels.
 	 */
 	private int minX, minY, maxX, maxY;
-	private EventManager em;
 	
 	private class UpdateBalls extends Event {
 		public UpdateBalls(long date) {
@@ -36,7 +34,7 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 		public void execute() {
 			for (Ball b : BallsSimulator.this.balls)
 				b.update(BallsSimulator.this.minX, BallsSimulator.this.maxX, BallsSimulator.this.minY, BallsSimulator.this.maxY);
-			BallsSimulator.this.em.addEvent(new UpdateBalls(this.getDate()+1));
+			BallsSimulator.this.getEventManager().addEvent(new UpdateBalls(this.getDate()+1));
 		}
 	}
 
@@ -53,13 +51,9 @@ public class BallsSimulator implements Simulable, Iterable<Ball> {
 			b.setVelocity(1 - (int) (Math.random() * 2) * 2, 1 - (int) (Math.random() * 2) * 2);
 			this.balls.add(b);
 		}
-		em = new EventManager();
-		em.addEvent(new UpdateBalls(1));
-	}
-
-	@Override
-	public void next() {
-		this.em.next();
+		EventManager em = new EventManager();
+		this.setEventManager(em);
+		this.setEvent(new UpdateBalls(1));
 	}
 
 	@Override
