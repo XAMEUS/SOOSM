@@ -7,7 +7,7 @@ import gui.Oval;
 
 /**
  * Classe représentant une balle.
- * @author julie
+ * @author 3
  *
  */
 public class Ball extends Oval {

@@ -11,7 +11,7 @@ import org.sma.simulator.Simulator;
 
 /**
  * Classe représentant un simulateur de Ball.
- * @author julie
+ * @author 3
  *
  */
 public class BallsSimulator extends Simulator implements Iterable<Ball> {
@@ -26,6 +26,10 @@ public class BallsSimulator extends Simulator implements Iterable<Ball> {
 	 */
 	private int minX, minY, maxX, maxY;
 	
+	/**
+	 * Classe interne permettant l'utilisation du gestionnaire d'événements.
+	 *
+	 */
 	private class UpdateBalls extends Event {
 		public UpdateBalls(long date) {
 			super(date);
