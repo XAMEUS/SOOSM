@@ -27,7 +27,7 @@ public class BoidsSimulator implements Simulable {
 	}
 	
 	public BoidsSimulator(GUISimulator gi) {
-		this.boids = new Boids(50, 0, 0, 800, 800, 10);
+		this.boids = new Boids(20, 0, 0, 1000, 1000, 10);
 		this.gi = gi;
 		this.em = new EventManager();
 		for (Boid b : this.boids)
