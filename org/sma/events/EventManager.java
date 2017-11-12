@@ -23,7 +23,7 @@ public class EventManager {
 
 	public void next() {
 		this.currentDate++;
-		System.out.println("Next... Current date : " + this.currentDate);
+		// System.out.println("Next... Current date : " + this.currentDate);
 		if (this.listEvent.containsKey(this.currentDate))
 			for (Event e : this.listEvent.get(this.currentDate))
 				e.execute();
