@@ -6,7 +6,7 @@ import org.sma.events.EventManager;
 import gui.Simulable;
 
 /**
- * Simulateur général, globalement un event manager encapsublé dans une classe qui implémente Simulable.
+ * Simulateur général, globalement un event manager encapsulé dans une classe qui implémente Simulable.
  */
 
 public abstract class Simulator implements Simulable {
