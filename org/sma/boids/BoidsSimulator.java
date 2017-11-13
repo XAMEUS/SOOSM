@@ -12,7 +12,7 @@ public class BoidsSimulator extends Simulator {
 
 	private List<Boids> boids; // plusieurs groupes différents (ou pas) de boids
 	private GUISimulator gi; // où dessiner les boids
-	
+
 	public BoidsSimulator(GUISimulator gi) {
 		this.boids = new ArrayList<>();
 		this.gi = gi;
@@ -20,7 +20,7 @@ public class BoidsSimulator extends Simulator {
 		this.setEventManager(em);
 		this.setFirstEvent(new UpdateBoids(gi, em, this.boids, 1));
 	}
-	
+
 	public void addBoids(Boids boids) {
 		this.boids.add(boids);
 		for (Boid b : boids)
@@ -31,7 +31,7 @@ public class BoidsSimulator extends Simulator {
 	public void restart() {
 		super.restart();
 		this.gi.reset();
-		for (Boids boids : this.boids) {			
+		for (Boids boids : this.boids) {
 			boids.reInit();
 			for (Boid b : boids)
 				this.gi.addGraphicalElement(b);

@@ -4,8 +4,8 @@ import java.awt.Color;
 import java.util.Iterator;
 
 /**
- * @author 3
- * Un ensemble de prédateurs est un ensemble de boids ayant la particuliarité de rechercher la proximité avec ses proies...
+ * @author 3 Un ensemble de prédateurs est un ensemble de boids ayant la
+ *         particuliarité de rechercher la proximité avec ses proies...
  */
 public class Predators extends Boids {
 	private Boids victims;
@@ -19,6 +19,7 @@ public class Predators extends Boids {
 		this.setNoFriend(700, 0.01);
 		this.victims = victims;
 	}
+
 	public Iterator<Boid> getNeighbors(Boid boid, double maxDist) {
 		return victims.getBoids().stream().filter(x -> boid.isVisible(x, maxDist)).iterator();
 	}
