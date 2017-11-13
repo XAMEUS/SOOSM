@@ -1,5 +1,4 @@
 package org.sma.balls;
-import java.awt.Color;
 
 import org.sma.colors.Colors;
 
