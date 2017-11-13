@@ -58,6 +58,13 @@ public class Boid implements GraphicalElement {
 		return a;
 	}
 
+	/**
+	 * Returns if b is visible by this object.
+	 * Uses also Boid.maxAngle.
+	 * @param b
+	 * @param maxDist: Maximum distance between this object and b
+	 * @return
+	 */
 	public boolean isVisible(Boid b, double maxDist) {
 		return this.getP().distanceSq(b.getP()) <= maxDist && this.getV().angleInRange(b.getV(), Boid.maxAngle);
 	}
