@@ -10,8 +10,8 @@ import gui.GUISimulator;
 
 public class BoidsSimulator extends Simulator {
 
-	private List<Boids> boids;
-	private GUISimulator gi;
+	private List<Boids> boids; // plusieurs groupes différents (ou pas) de boids
+	private GUISimulator gi; // où dessiner les boids
 	
 	public BoidsSimulator(GUISimulator gi) {
 		this.boids = new ArrayList<>();
