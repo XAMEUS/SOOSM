@@ -16,9 +16,9 @@ public class TestBoids {
 		int maxY = 800;
 		Boids victims = new Boids(20, minX, minY, maxX, maxY, 20, Colors.color1);
 		bs.addBoids(victims);
-		Boids predator = new Predator(10, minX, minY, maxX, maxY, 25, Colors.color6, victims);
+		Boids predator = new Predators(10, minX, minY, maxX, maxY, 25, Colors.color6, victims);
 		bs.addBoids(predator);
-		bs.addBoids(new Predator(5, minX, minY, maxX, maxY, 30, Colors.color5, predator));
+		bs.addBoids(new Predators(5, minX, minY, maxX, maxY, 30, Colors.color5, predator));
 		gi.setSimulable(bs);
 	}
 }
