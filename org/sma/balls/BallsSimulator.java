@@ -57,7 +57,7 @@ public class BallsSimulator extends Simulator implements Iterable<Ball> {
 		}
 		EventManager em = new EventManager();
 		this.setEventManager(em);
-		this.setEvent(new UpdateBalls(1));
+		this.setFirstEvent(new UpdateBalls(1));
 	}
 
 	@Override

@@ -17,8 +17,9 @@ public abstract class Simulator implements Simulable {
 		this.em = em;
 	}
 	
-	public void setEvent(Event e) {
+	public void setFirstEvent(Event e) {
 		this.em.addEvent(e);
+		this.em.setFirstEvent(e);
 	}
 
 	public EventManager getEventManager() {
@@ -28,6 +29,12 @@ public abstract class Simulator implements Simulable {
 	@Override
 	public void next() {
 		this.em.next();
+	}
+	
+
+	@Override
+	public void restart() {
+		this.em.restart();
 	}
 
 }

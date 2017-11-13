@@ -17,11 +17,12 @@ public class BoidsSimulator extends Simulator {
 			this.gi.addGraphicalElement(b);
 		EventManager em = new EventManager();
 		this.setEventManager(em);
-		this.setEvent(new UpdateBoids(gi, em, boids, 1));
+		this.setFirstEvent(new UpdateBoids(gi, em, boids, 1));
 	}
 
 	@Override
 	public void restart() {
+		super.restart();
 		this.gi.reset();
 		this.boids.reInit();
 		for (Boid b : this.boids)
