@@ -76,10 +76,21 @@ A chaque étape de la simulation, on parcours la liste, calcule le nombre de voi
 \section{Modèle des boids}
 
 \subsection*{Choix de conception}
+Nous avons implémenté une classe Boid simple contenant les caractéristiques d'un boid: sa masse, sa vitesse maximale, ses vecteurs de position, de vitesse ainsi que d'accélération.
 
+Pour nous aider dans les opéréations géométriques, nous avons aussi implémenté une classe Vect, qui contient tout ce qui est utile pour manipuler ces trois vecteurs.
+
+La classe Boids contient un ensemble de boids, s'occupe d'animer les boids en utilisant le principe fondamental de la dynamique.
+Nous avons ajouté par rapport aux trois forces de départ une force permettant de garder les boids dans l'écran (ou du moins les faire revenir) et une autre permettant de les faire tourner en cercle si ils ne trouvent pas de voisins visibles de la même espèce.
+
+Il suffit d'appeler des setters adéquats pour configurer les boids afin de leur donner aisément un comportement particulier, qui peut fortement varier.
+
+Une autre classe, Predators hérite de Boids pour représenter les prédateurs. Ceux-ci cherchent non pas des voisins au sein de leur propre groupe mais auprès d'un autre groupe. Ils sont aussi solitaires.
 
 \subsection*{Tests effectués}
 
+Inspirés des caractéristiques des pigeons (qui peuvent être un type de boid particulier), nous avons commencés par paramétrer un a un et indépendamment les paramètres de ces oiseaux.
 
+Ensuite nous avons recherché une harmonie entre ces différents paramètre lors du couplage, afin de reproduire visuellement des boids les plus proches de la réalité.
 
 \end{document}
