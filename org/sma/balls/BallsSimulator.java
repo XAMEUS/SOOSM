@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.sma.colors.Colors;
 import org.sma.events.Event;
 import org.sma.events.EventManager;
 import org.sma.simulator.Simulator;
@@ -51,7 +52,7 @@ public class BallsSimulator extends Simulator implements Iterable<Ball> {
 		for (int i = 0; i < n; i++) {
 			int x = this.maxX - this.minX - 2 * Ball.getR();
 			int y = this.maxY - this.minY - 2 * Ball.getR();
-			Ball b = new Ball((int)(this.minX + Ball.getR() + Math.random() * x), (int)(this.minY + Ball.getR() + Math.random() * y), Color.GREEN, Color.darkGray);
+			Ball b = new Ball((int)(this.minX + Ball.getR() + Math.random() * x), (int)(this.minY + Ball.getR() + Math.random() * y), Colors.color1, Colors.color2);
 			b.setVelocity(1 - (int) (Math.random() * 2) * 2, 1 - (int) (Math.random() * 2) * 2);
 			this.balls.add(b);
 		}

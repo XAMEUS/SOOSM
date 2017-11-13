@@ -6,6 +6,10 @@ import org.sma.colors.Colors;
 
 import gui.GUISimulator;
 
+/**
+ * Pour jouer avec les Boids, on peut changer les paramètres pour avoir des populations différentes
+ * et définir des relations entre elles.
+ */
 public class TestBoids {
 	public static void main(String[] args) {
 		GUISimulator gi = new GUISimulator(200, 200, new Color(242, 239, 234));

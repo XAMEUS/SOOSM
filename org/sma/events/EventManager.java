@@ -8,7 +8,7 @@ import java.util.Map;
 public class EventManager {
 
 	private long currentDate;
-	private Map<Long, List<Event>> listEvent;
+	private Map<Long, List<Event>> listEvent; // time -> liste(event1, event2, etc.)
 	private Event firstEvent; // utile pour le restart()
 
 	public EventManager() {
@@ -41,6 +41,9 @@ public class EventManager {
 		return true;
 	}
 
+	/**
+	 * Vide la liste, reset le currentDate et recupere le premier evenement.
+	 */
 	public void restart() {
 		this.currentDate = 0;
 		this.listEvent.clear();

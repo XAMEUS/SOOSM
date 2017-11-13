@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.sma.colors.Colors;
+
 import gui.Oval;
 
 public class Balls implements Iterable<Ball> {
@@ -14,7 +16,7 @@ public class Balls implements Iterable<Ball> {
 	public Balls(int n) {
 		this.balls = new ArrayList<>();
 		for (int i = 0; i < n; i++)
-			this.balls.add(new Ball((int)(Math.random() * 100), (int)(Math.random() * 100), Color.GREEN, Color.darkGray));
+			this.balls.add(new Ball((int)(Math.random() * 100), (int)(Math.random() * 100), Colors.color1, Colors.color2));
 	}
 	
 	public void translate(int dx, int dy) {
