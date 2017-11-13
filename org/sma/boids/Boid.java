@@ -1,6 +1,7 @@
 package org.sma.boids;
 
 import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
@@ -21,6 +22,8 @@ public class Boid implements GraphicalElement {
 	}
 
 	Vect p, v, a;
+	
+	private final Color color;
 
 	static {
 		shape.moveTo(-size / 2, -size / 2);
@@ -29,16 +32,18 @@ public class Boid implements GraphicalElement {
 		shape.closePath();
 	}
 	
-	public Boid(int x, int y, int vx, int vy) {
+	public Boid(int x, int y, int vx, int vy, Color color) {
 		p = new Vect(x, y);
 		v = new Vect(vx, vy);
 		a = new Vect(0, 0);
+		this.color = color;
 	}
 	
-	public Boid(Vect p, Vect v, Vect a) {
+	public Boid(Vect p, Vect v, Vect a, Color color) {
 		this.p = p;
 		this.v = v;
 		this.a = a;
+		this.color = color;
 	}
 	
 	public Vect getP() {
@@ -65,21 +70,22 @@ public class Boid implements GraphicalElement {
 		g2d.translate((int) p.getX(), (int) p.getY());
 		g2d.rotate(v.getAngle());
 
-		g2d.setColor(Colors.color1);
+//		g2d.setColor(Colors.color1);
+		g2d.setColor(this.color);
 		g2d.fill(shape);
+		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(Colors.color2);
 		g2d.draw(shape);
 
 		// show speed
-		g2d.setStroke(new BasicStroke(3));
 		g2d.setColor(Colors.color5);
 		g2d.drawLine((int) (size * 1.5), 0, (int) (size * 1.5) + (int) v.getLength(), 0);
 
 		g2d.setTransform(save);
 		
-		g2d.setStroke(new BasicStroke(2));
-		g2d.setColor(Colors.color6);
-		g2d.drawLine((int) p.getX(), (int) p.getY(), (int) a.getX() + (int) p.getX(), (int) a.getY() + (int) p.getY());
+//		g2d.setStroke(new BasicStroke(2));
+//		g2d.setColor(Colors.color6);
+//		g2d.drawLine((int) p.getX(), (int) p.getY(), (int) a.getX() + (int) p.getX(), (int) a.getY() + (int) p.getY());
 	}
 
 }

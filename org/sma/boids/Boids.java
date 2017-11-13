@@ -1,5 +1,6 @@
 package org.sma.boids;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -28,11 +29,17 @@ public class Boids implements Iterable<Boid> {
 	private double distanceNoFriend;
 	private double fNoFriend;
 	
+	private Color color;
 	
-	public Boids(int n, int minx, int miny, int maxx, int maxy, int max_speed) {
+	public Boids(int n, int minx, int miny, int maxx, int maxy, int max_speed, Color color) {
 		this.boids = new ArrayList<>();
+		this.color = color;
 		for (int i = 0; i < n; i++)
-			this.boids.add(new Boid((int)(Math.random() * (maxx - minx)) + minx, (int)(Math.random() * (maxy - minx)) + minx, (int)(Math.random() * max_speed), (int)(Math.random() * max_speed)));
+			this.boids.add(new Boid((int)(Math.random() * (maxx - minx)) + minx,
+									(int)(Math.random() * (maxy - minx)) + minx,
+									(int)(Math.random() * max_speed),
+									(int)(Math.random() * max_speed),
+									this.color));
 		this.boidsInit = new ArrayList<>(boids);
 		this.minx = minx;
 		this.miny = miny;
@@ -91,7 +98,7 @@ public class Boids implements Iterable<Boid> {
 			Vect v = b.getV().translate(a);
 			v.setPol(v.getAngle(), Math.min(v.getLength(), this.maxSpeed));
 			Vect p = b.getP().translate(v);
-			nBoids.add(new Boid(p, v, a));
+			nBoids.add(new Boid(p, v, a, this.color));
 		}
 		this.boids = nBoids;
 	}
