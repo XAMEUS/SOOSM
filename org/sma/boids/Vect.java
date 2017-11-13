@@ -1,5 +1,10 @@
 package org.sma.boids;
 
+/**
+ * @author 3
+ * Cette classe permet la manipulation des vecteurs en implémentant les méthodes adéquates.
+ * Une particuliarité de l'implémentation est qu'elle stocke et gère simultanément les vecteurs sous forme polaire et sous forme cartésienne.
+ */
 public class Vect {
 	private double x = 0;
 	private double y = 0;
@@ -50,6 +55,12 @@ public class Vect {
 		this.y = Vect.y(angle, length);
 	}
 	
+	/**
+	 * Détermine si l'angle de v est proche de l'angle de l'objet, à range près.
+	 * @param v
+	 * @param range
+	 * @return
+	 */
 	public boolean angleInRange(Vect v, double range) {
 		double base = (this.angle % ( 2 * Math.PI)) + 2 * Math.PI;
 		double candidate = (v.getAngle() % ( 2 * Math.PI)) + 2 * Math.PI;
@@ -79,11 +90,23 @@ public class Vect {
 	static double distanceSq(double x, double y) {
 		return x * x + y * y;
 	}
-
+	
+	/**
+	 * Permet la conversion des coordonnées cartésiennes vers les coordonnées polaires.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	static double distance(double x, double y) {
 		return Math.sqrt((double) distanceSq(x, y));
 	}
-
+	
+	/**
+	 * Permet la conversion des coordonnées cartésiennes vers les coordonnées polaires.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	static double angle(double x, double y) {
 		if (x != 0)
 			return Math.atan(y / x) + (x > 0 ? 0 : 1) * (y >= 0 ? 1 : -1)
@@ -94,10 +117,22 @@ public class Vect {
 			return 0.;
 	}
 
+	/**
+	 * Permet la conversion des coordonnées polaires vers les coordonnées cartésiennes.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	static double x(double angle, double length) {
 		return (double) (length * Math.cos(angle));
 	}
 
+	/**
+	 * Permet la conversion des coordonnées polaires vers les coordonnées cartésiennes.
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	static double y(double angle, double length) {
 		return (double) (length * Math.sin(angle));
 	}

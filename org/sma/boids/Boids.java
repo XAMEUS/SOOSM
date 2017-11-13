@@ -50,7 +50,7 @@ public class Boids implements Iterable<Boid> {
 		this.setAlignment(1, 500);
 		this.setSeparation(10, 50, 1);
 		this.setKeeper(0.1, 0.01);
-		this.setNoFriend(500, 0.01);
+		this.setNoFriend(500, 5);
 	}
 	
 	public void setCohesion(double coefCohesion, double distanceCohesion, double powCohesion, double fMaxCohesion) {
@@ -88,7 +88,9 @@ public class Boids implements Iterable<Boid> {
 	public List<Boid> getBoids() {
 		return boids;
 	}
-	
+	/**
+	 * Implémente le pas suivant. La simulation réalise un PFD sur chaque boid à partir des données de ce qui va devenir l'ancien pas.
+	 */
 	public void nextStep() {
 		List<Boid> nBoids = new ArrayList<>();
 		for(int i = 0; i < boids.size(); i++) {
@@ -107,6 +109,11 @@ public class Boids implements Iterable<Boid> {
 		this.boids = new ArrayList<>(boidsInit);
 	}
 	
+	/**
+	 * Implémente la force de cohésion. Pour plus de détails lire le sujet.
+	 * @param b
+	 * @return
+	 */
 	public Vect cohesion(Boid b) {
 		int nbVois = -1;
 		Vect nPos = new Vect(-b.getP().getX(), -b.getP().getY());
@@ -121,6 +128,11 @@ public class Boids implements Iterable<Boid> {
 		return nPos;			
 	}
 	
+	/**
+	 * Implémente la force d'alignement. Pour plus de détails lire le sujet.
+	 * @param b
+	 * @return
+	 */
 	public Vect alignment(Boid b) {
 		int nbVois = -1;
 		Vect nVit = new Vect(-b.getV().getX(), -b.getV().getY());
@@ -133,6 +145,11 @@ public class Boids implements Iterable<Boid> {
 		return nVit;
 	}
 	
+	/**
+	 * Implémente la force de séparation. Pour plus de détails lire le sujet.
+	 * @param b
+	 * @return
+	 */
 	public Vect separation(Boid b) {
 		int nbVois = -1;
 		Vect moinsB = new Vect(-b.getP().getX(), -b.getP().getY());
@@ -151,6 +168,11 @@ public class Boids implements Iterable<Boid> {
 		return nPos;
 	}
 	
+	/**
+	 * Si b sort de l'écran, screenKeeper va retourner une force suffisamment grande pour lui permettre de revenir dans l'écran.
+	 * @param b
+	 * @return
+	 */
 	public Vect screenKeeper(Boid b) {
 		double x = b.getP().getX();
 		double y = b.getP().getY();
@@ -162,12 +184,17 @@ public class Boids implements Iterable<Boid> {
 		return force;
 	}
 	
+	/**
+	 * Si b n'a pas de voisin visible, noFriend va retourner une force perpendiculaire à sa vitesse, lui permettant de tourner.
+	 * @param b
+	 * @return
+	 */
 	public Vect noFriend(Boid b) {
 		int nbVois = -1;
 		for(Iterator<Boid> i = this.getNeighbors(b, this.distanceNoFriend * this.distanceNoFriend); i.hasNext(); nbVois++) i.next();
 		Vect force = new Vect(0, 0);
 		if(nbVois == 0) {
-			force.setPol(Math.PI / 2, this.fNoFriend);
+			force.setPol((b.getV().getAngle() + Math.PI / 2) % (2 * Math.PI), this.fNoFriend);
 		}
 		return force;
 	}

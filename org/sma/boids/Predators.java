@@ -3,6 +3,10 @@ package org.sma.boids;
 import java.awt.Color;
 import java.util.Iterator;
 
+/**
+ * @author 3
+ * Un ensemble de prédateurs est un ensemble de boids ayant la particuliarité de rechercher la proximité avec ses proies...
+ */
 public class Predators extends Boids {
 	private Boids victims;
 
