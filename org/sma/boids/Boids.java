@@ -9,7 +9,6 @@ public class Boids implements Iterable<Boid> {
 	private List<Boid> boidsInit;
 	private List<Boid> boids;
 	private int minx, miny, maxx, maxy;
-	private double maxSpeed;
 	
 	private double coefCohesion;
 	private double distanceCohesion;
@@ -39,13 +38,12 @@ public class Boids implements Iterable<Boid> {
 									(int)(Math.random() * (maxy - minx)) + minx,
 									(int)(Math.random() * max_speed),
 									(int)(Math.random() * max_speed),
-									this.color));
+									this.color, max_speed));
 		this.boidsInit = new ArrayList<>(boids);
 		this.minx = minx;
 		this.miny = miny;
 		this.maxx = maxx;
 		this.maxy = maxy;
-		this.maxSpeed = max_speed;
 		this.setCohesion(1, 500, 0.001, 10);
 		this.setAlignment(1, 500);
 		this.setSeparation(10, 50, 1);
@@ -98,9 +96,9 @@ public class Boids implements Iterable<Boid> {
 			Vect a = cohesion(b).translate(alignment(b)).translate(separation(b)).translate(screenKeeper(b)).translate(noFriend(b));
 			a.mult(Boid.getWeight());
 			Vect v = b.getV().translate(a);
-			v.setPol(v.getAngle(), Math.min(v.getLength(), this.maxSpeed));
+			v.setPol(v.getAngle(), Math.min(v.getLength(), b.getMaxSpeed()));
 			Vect p = b.getP().translate(v);
-			nBoids.add(new Boid(p, v, a, this.color));
+			nBoids.add(new Boid(p, v, a, this.color, b.getMaxSpeed()));
 		}
 		this.boids = nBoids;
 	}

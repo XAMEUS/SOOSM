@@ -17,6 +17,7 @@ public class Boid implements GraphicalElement {
 	static final int size = 20;
 	static double maxAngle = Math.PI * 2 / 3;
 	static double weight = 0.3;
+	private double maxSpeed;
 	public static double getWeight() {
 		return weight;
 	}
@@ -32,17 +33,19 @@ public class Boid implements GraphicalElement {
 		shape.closePath();
 	}
 	
-	public Boid(int x, int y, int vx, int vy, Color color) {
+	public Boid(int x, int y, int vx, int vy, Color color, double maxSpeed) {
 		p = new Vect(x, y);
 		v = new Vect(vx, vy);
 		a = new Vect(0, 0);
+		this.maxSpeed = maxSpeed;
 		this.color = color;
 	}
 	
-	public Boid(Vect p, Vect v, Vect a, Color color) {
+	public Boid(Vect p, Vect v, Vect a, Color color, double maxSpeed) {
 		this.p = p;
 		this.v = v;
 		this.a = a;
+		this.maxSpeed = maxSpeed;		
 		this.color = color;
 	}
 	
@@ -56,6 +59,10 @@ public class Boid implements GraphicalElement {
 
 	public Vect getA() {
 		return a;
+	}
+
+	public double getMaxSpeed() {
+		return this.maxSpeed;
 	}
 
 	/**
